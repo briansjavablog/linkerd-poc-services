@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.briansdevblog.linkerd</groupId>
-	<artifactId>SavingAccountService</artifactId>
+	<artifactId>SavingsAccountService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SavingAccountService</name>
+	<name>SavingsAccountService</name>
 	<description>simple microservice forms part of linkered POC</description>
 	<properties>
 		<java.version>11</java.version>

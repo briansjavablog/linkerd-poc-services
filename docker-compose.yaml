@@ -1,13 +1,25 @@
 version: '2'
 services:
   current-account-service:
-    image: briansdevblog/current-account-service:latest
+    image: briansjavablog/current-account-service:latest
     ports:
       - "8081:8081"
     environment:
       SERVER_PORT: 8081
+  savings-account-service:
+    image: briansjavablog/savings-account-service:latest
+    ports:
+      - "8082:8082"
+    environment:
+      SERVER_PORT: 8082
+  credit-card-service:
+    image: briansjavablog/credit-card-service:latest
+    ports:
+      - "8083:8083"
+    environment:
+      SERVER_PORT: 8083
   banking-service:
-    image: briansdevblog/banking-service:latest
+    image: briansjavablog/banking-service:latest
     ports:
       - "8084:8084"
     environment:

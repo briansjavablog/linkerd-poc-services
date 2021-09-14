@@ -1,19 +1,24 @@
 package com.briansdevblog.linkerd.banking;
 
 import com.briansdevblog.linkerd.banking.model.CurrentAccount;
+import lombok.AllArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+@Component
+@AllArgsConstructor
 public class ServiceClient<T> {
 
+    private RestTemplate restTemplate;
 
-    public List<T> test(){
+    public <T> List<T> callService(String uri){
 
-        List<CurrentAccount> currentAccounts =
-                restTemplate.exchange(uriConfig.getCurrentAccountServiceUri() + "/" + customerNumber,
-                        HttpMethod.GET, null, new ParameterizedTypeReference<List<CurrentAccount>>() {
-                        }).getBody();
+        return restTemplate.exchange(uri, HttpMethod.GET,
+                                   null,
+                                    new ParameterizedTypeReference<List<T>>() {}).getBody();
     }
 }

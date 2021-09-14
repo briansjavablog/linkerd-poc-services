@@ -1,5 +1,6 @@
 package com.briansdevblog.linkerd.banking.controller;
 
+import com.briansdevblog.linkerd.banking.ServiceClient;
 import com.briansdevblog.linkerd.banking.model.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,30 +19,23 @@ import java.util.List;
 public class BankingServiceController {
 
     private RestTemplate restTemplate;
+    private ServiceClient serviceClient;
     private UriConfig uriConfig;
 
 
     @GetMapping(path = "api/account-details/{customerNumber}")
     public CustomerAccounts getCustomerAccountDetails(@PathVariable("customerNumber") Integer customerNumber){
 
-        // returns data for certain customer numbers, otherwise a non
-        // 200 response - handy for triggering error scenarios
+        List<CurrentAccount> currentAccounts = serviceClient.callService(uriConfig.getCurrentAccountServiceUri() + "/" + customerNumber);
 
-        List<CurrentAccount> currentAccounts =
-                    restTemplate.exchange(uriConfig.getCurrentAccountServiceUri() + "/" + customerNumber,
-                            HttpMethod.GET, null, new ParameterizedTypeReference<List<CurrentAccount>>() {
-                            }).getBody();
+        List<SavingsAccount> savingsAccounts = serviceClient.callService(uriConfig.getSavingsAccountServiceUri() + "/" + customerNumber);
 
-        /*List<SavingsAccount> savingsAccounts =
-                restTemplate.getForObject(uriConfig.getSavingsAccountServiceUri() + "/" + customerNumber, SavingsAccountList.class).getSavingsAccounts();
+        List<CreditCard> creditCards = serviceClient.callService(uriConfig.getCreditCardServiceUri() + "/" + customerNumber);
 
-        List<CreditCard> creditCards =
-                restTemplate.getForObject(uriConfig.getCreditCardServiceUri() + "/" + customerNumber, CreditCardList.class).getCreditCards();
-*/
         CustomerAccounts customerAccounts = CustomerAccounts.builder()
                                                 .currentAccounts(currentAccounts)
-                                                .savingsAccounts(null/*savingsAccounts*/)
-                                                .creditCards(null/*creditCards*/)
+                                                .savingsAccounts(savingsAccounts)
+                                                .creditCards(creditCards)
                                                 .build();
 
         log.info("customerNumber [{}] has [{}]", customerNumber, customerAccounts);
