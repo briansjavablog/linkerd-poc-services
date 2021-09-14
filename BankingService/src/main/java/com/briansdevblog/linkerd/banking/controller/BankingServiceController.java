@@ -26,11 +26,16 @@ public class BankingServiceController {
     @GetMapping(path = "api/account-details/{customerNumber}")
     public CustomerAccounts getCustomerAccountDetails(@PathVariable("customerNumber") Integer customerNumber){
 
+        log.info("retrieving account details or customerNumber [{}]", customerNumber);
+
         List<CurrentAccount> currentAccounts = serviceClient.callService(uriConfig.getCurrentAccountServiceUri() + "/" + customerNumber);
+        log.info("retrieved [{}]", currentAccounts);
 
         List<SavingsAccount> savingsAccounts = serviceClient.callService(uriConfig.getSavingsAccountServiceUri() + "/" + customerNumber);
+        log.info("retrieved [{}]", savingsAccounts);
 
         List<CreditCard> creditCards = serviceClient.callService(uriConfig.getCreditCardServiceUri() + "/" + customerNumber);
+        log.info("retrieved [{}]", creditCards);
 
         CustomerAccounts customerAccounts = CustomerAccounts.builder()
                                                 .currentAccounts(currentAccounts)

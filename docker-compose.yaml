@@ -25,5 +25,5 @@ services:
     environment:
       SERVER_PORT: 8084
       CURRENT_ACCOUNT_SERVICE_URI: http://current-account-service:8081/api/current-account
-      SAVINGS_ACCOUNT_SERVICE_URI: http://savings-account-service:8081/api/savings-account
-      CREDIT_CARD_SERVICE_URI: http://credit-card-service:8081/api/credit-card
+      SAVINGS_ACCOUNT_SERVICE_URI: http://savings-account-service:8082/api/savings-account
+      CREDIT_CARD_SERVICE_URI: http://credit-card-service:8083/api/credit-card
