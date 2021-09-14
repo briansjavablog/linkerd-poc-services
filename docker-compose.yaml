@@ -1,0 +1,17 @@
+version: '2'
+services:
+  current-account-service:
+    image: briansdevblog/current-account-service:latest
+    ports:
+      - "8081:8081"
+    environment:
+      SERVER_PORT: 8081
+  banking-service:
+    image: briansdevblog/banking-service:latest
+    ports:
+      - "8084:8084"
+    environment:
+      SERVER_PORT: 8084
+      CURRENT_ACCOUNT_SERVICE_URI: http://current-account-service:8081/api/current-account
+      SAVINGS_ACCOUNT_SERVICE_URI: http://savings-account-service:8081/api/savings-account
+      CREDIT_CARD_SERVICE_URI: http://credit-card-service:8081/api/credit-card
