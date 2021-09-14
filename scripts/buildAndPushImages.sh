@@ -6,9 +6,9 @@ mvn clean package
 docker image build -t briansjavablog/current-account-service:latest .
 #docker push briansjavablog/current-account-service:latest
 cd ..
-cd SavingAccountService
+cd SavingsAccountService
 mvn clean package
-docker image build -t briansdevblog/saving-account-service:latest .
+docker image build -t briansdevblog/savings-account-service:latest .
 #docker push briansdevblog/saving-account-service:latest
 cd ..
 cd CreditCardService
