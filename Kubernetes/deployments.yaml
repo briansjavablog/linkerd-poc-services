@@ -1,0 +1,154 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: current-account-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: current-account-service
+  template:
+    metadata:
+      labels:
+        app: current-account-service
+    spec:
+      containers:
+        - name: current-account-service
+          image: briansjavablog/current-account-service:latest
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: savings-account-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: savings-account-service
+  template:
+    metadata:
+      labels:
+        app: savings-account-service
+    spec:
+      containers:
+        - name: savings-account-service
+          image: briansjavablog/savings-account-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credit-card-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: credit-card-service
+  template:
+    metadata:
+      labels:
+        app: credit-card-service
+    spec:
+      containers:
+        - name: credit-card-service
+          image: briansjavablog/credit-card-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banking-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: banking-service
+  template:
+    metadata:
+      labels:
+        app: banking-service
+    spec:
+      containers:
+        - name: banking-service
+          image: briansjavablog/banking-service:latest
+          imagePullPolicy: Always
+          env:
+          - name: CURRENT_ACCOUNT_SERVICE_URI
+            value: http://current-account-service/api/current-account
+          - name: SAVINGS_ACCOUNT_SERVICE_URI
+            value: http://savings-account-service/api/savings-account
+          - name: CREDIT_CARD_SERVICE_URI
+            value: http://credit-card-service/api/credit-card  
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
