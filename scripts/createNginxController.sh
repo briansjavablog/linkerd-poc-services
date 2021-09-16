@@ -6,9 +6,6 @@ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
 # Set variable for ACR location to use for pulling images
 ACR_URL=linkerdpocregistry.azurecr.io
-#STATIC_IP=20.58.112.94
-#DNS_LABEL=linkerd-poc
-
 CONTROLLER_REGISTRY=k8s.gcr.io
 CONTROLLER_IMAGE=ingress-nginx/controller
 CONTROLLER_TAG=v0.48.1
@@ -20,7 +17,6 @@ DEFAULTBACKEND_IMAGE=defaultbackend-amd64
 DEFAULTBACKEND_TAG=1.5
 
 # Set the namespace to be used
-#NAMESPACE=ingress-basic
 NAMESPACE=ingress
 
 # Add the ingress-nginx repository

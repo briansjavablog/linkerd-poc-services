@@ -1,7 +1,6 @@
 #!/bin/sh
 
 REGISTRY_NAME=LinkerdPocRegistry
-
 CONTROLLER_REGISTRY=k8s.gcr.io
 CONTROLLER_IMAGE=ingress-nginx/controller
 CONTROLLER_TAG=v0.48.1
