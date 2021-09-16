@@ -10,6 +10,8 @@ spec:
       app: current-account-service
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: current-account-service
     spec:
@@ -48,6 +50,8 @@ spec:
       app: savings-account-service
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: savings-account-service
     spec:
@@ -86,6 +90,8 @@ spec:
       app: credit-card-service
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: credit-card-service
     spec:
@@ -124,6 +130,8 @@ spec:
       app: banking-service
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: banking-service
     spec:
